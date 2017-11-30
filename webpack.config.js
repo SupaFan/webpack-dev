@@ -1,14 +1,14 @@
+const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 // 模块映射到输出 bundle 的过程
 const ManifestPlugin = require('webpack-manifest-plugin');
-const fs = require('fs');
-
+// 打包地址
 const buildPath = path.resolve(__dirname, './dist');
-const templateRoot = path.resolve(__dirname, './page')
-
+// 模板地址
+const templateRoot = path.resolve(__dirname, './page');
 // NODEJS FS 删除文件
 let emptyDir = function (fileUrl) {
   let files = fs.readdirSync(fileUrl); //读取该文件夹
@@ -22,13 +22,17 @@ let emptyDir = function (fileUrl) {
       }
   });
 };
-
-const pageEntry = {}; // 页面入口
-const pageHtml = [];  // 页面模板
+// 页面入口
+const pageEntry = {};
+// 页面模板
+const pageHtml = [];
+// 导航JSON
 const navigation = {
   "navList": []
-}
-!fs.existsSync(buildPath) && fs.mkdirSync(buildPath)
+};
+// 检查是否有打包目录
+!fs.existsSync(buildPath) && fs.mkdirSync(buildPath);
+// 读取文件目录
 const pages = fs.readdirSync(templateRoot)
 pages.forEach((name, index) => {
   // 页面入口配置
@@ -81,7 +85,8 @@ module.exports = env => {
       new webpack.optimize.CommonsChunkPlugin({ // 公共模块提取
         name: 'common'
       }),
-      // new CleanWebpackPlugin(buildPath), // 清理 项目之外无法清理 用nodejs清理文件
+      // 清理 项目之外无法清理 用nodejs清理文件
+      // new CleanWebpackPlugin(buildPath),
     ].concat(pageHtml),
     output: {
       filename: 'js/[name]-[hash].bundle.js',
