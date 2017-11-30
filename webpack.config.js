@@ -81,7 +81,7 @@ module.exports = env => {
       new webpack.optimize.CommonsChunkPlugin({ // 公共模块提取
         name: 'common'
       }),
-      // new CleanWebpackPlugin([path.resolve(__dirname, '../lovecanteen-web/src/main/resources/static/spas/')]), // 清理 项目之外无法清理 用nodejs清理文件
+      // new CleanWebpackPlugin(buildPath), // 清理 项目之外无法清理 用nodejs清理文件
     ].concat(pageHtml),
     output: {
       filename: 'js/[name]-[hash].bundle.js',
@@ -98,7 +98,7 @@ module.exports = env => {
             'postcss-loader',
           ]
         }, {
-          test: /\.(png|jpg|git)$/,
+          test: /\.(png|jpg|gif)$/,
           use: [
             'url-loader?limit=20000&name=[name]-[hash].[ext]&outputPath=images/',
             'image-webpack-loader'
