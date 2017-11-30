@@ -28,7 +28,7 @@ const pageHtml = [];  // 页面模板
 const navigation = {
   "navList": []
 }
-
+!fs.existsSync(buildPath) && fs.mkdirSync(buildPath)
 const pages = fs.readdirSync(templateRoot)
 pages.forEach((name, index) => {
   // 页面入口配置
@@ -60,7 +60,7 @@ module.exports = env => {
   const config = {publicPath: '/'}
   emptyDir(buildPath)
   if (env.NODE_ENV === 'build') {
-    config.publicPath = '/spas/'
+    config.publicPath = './'
   }
   return {
     entry: Object.assign(pageEntry, {
