@@ -105,8 +105,14 @@ module.exports = env => {
         }, {
           test: /\.(png|jpg|gif)$/,
           use: [
-            'url-loader?limit=20000&name=[name]-[hash].[ext]&outputPath=images/',
-            'image-webpack-loader'
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 1,
+                outputPath: 'images/',
+                name: '[path]/[name]-[hash].[ext]'
+              }
+            }
           ]
         }, {
           test: /\.(woff|woff2|eot|ttf|otf)$/,

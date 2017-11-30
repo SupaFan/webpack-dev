@@ -29,6 +29,8 @@
     "postcss-cssnext": "^3.0.2",
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.6",
+    "postcss-nested": "^2.1.2",
+    "postcss-size": "^2.0.0",
     "style-loader": "^0.18.2",
     "sugarss": "^1.0.0",
     "url-loader": "^0.5.9",
